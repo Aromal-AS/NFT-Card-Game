@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { PageHOC, CustomInput, CustomButton } from '../components';
 import { useGlobalContext } from '../context';
 
@@ -8,13 +8,14 @@ const Home = () => {
   const [playerName, setPlayerName] = useState('');
 
   const handleClick = async () => {
+    
     try {
+    
       console.log({ contract });
       const playerExists = await contract.isPlayer(walletAddress);
 
       if(!playerExists) {
         await contract.registerPlayer(playerName, playerName);
-
         setShowAlert({
           status: 'true',
           type: "info",
@@ -37,7 +38,7 @@ const Home = () => {
 
       <CustomButton
         title="Register"
-        handleClick={(handleClick) => {}}
+        handleClick={handleClick}
         restStyles="mt-6"
       />
     </div>
